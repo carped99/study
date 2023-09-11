@@ -1,0 +1,43 @@
+version: '3'
+name: "ansible"
+networks:
+  ansible:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.26.0.0/16
+
+services:
+  control:
+    image: ansible-machine:latest
+    build:
+      context: machine
+    container_name: control
+    hostname: control
+    ports:
+      - "22:22"
+    networks:
+      ansible:
+        ipv4_address: 172.26.0.2
+  remote1:
+    image: ansible-machine:latest
+    container_name: remote1
+    hostname: remote1
+    networks:
+      ansible:
+        ipv4_address: 172.26.0.3
+  remote2:
+    image: ansible-machine:latest
+    container_name: remote2
+    hostname: remote2
+    networks:
+      ansible:
+        ipv4_address: 172.26.0.4
+  remote3:
+    image: ansible-machine:latest
+    container_name: remote3
+    hostname: remote3
+    networks:
+      ansible:
+        ipv4_address: 172.26.0.5
+
